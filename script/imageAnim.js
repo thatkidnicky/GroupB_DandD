@@ -88,16 +88,21 @@
         }));
 	});
 
+	//Drop zone reset
+    function resetDropZone() {
+        dropZones.forEach(zone => {
+            zone.innerHTML = "";
+        });
+    }
 
 	function resetPuzzlePieces() {
 		//empty thumbnail container
 		piecesBoard.innerHTML = "";
 		createPuzzlePieces(this.dataset.puzzleref)
 	}
-	//event handling at bottom
-	
-	puzzleSelectors.forEach(puzzle => puzzle.addEventListener('click', resetPuzzlePieces));
 
+	//event handling at bottom
+	puzzleSelectors.forEach(puzzle => puzzle.addEventListener('click', resetPuzzlePieces));
 	createPuzzlePieces(0);
 
 
