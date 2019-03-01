@@ -6,8 +6,7 @@
 	let piecesBoard = document.querySelector(".puzzle-pieces"),
 		puzzleBoard = document.querySelector(".puzzle-board"),
 		puzzleSelectors = document.querySelectorAll("#buttonHolder img");
-
-		let dropZones = document.querySelectorAll('.drop-zone');
+		dropZones = document.querySelectorAll('.drop-zone');
 
 	//function goes in middle
 
@@ -40,19 +39,30 @@
 	}
 
 	// handle dragover and drop
-	// 
 	dropZones.forEach(zone => {
+
+		 //drop counter fucntion to elimanite multiple drops in one quadrient
+        var dropCounter = 0;
 		zone.addEventListener("dragover", function(e) {
 			e.preventDefault();
-			console.log("Drag me Baby");
+			console.log("Drag me");
 		});
 
 		zone.addEventListener("drop", function(e) {
 			e.preventDefault();
-			console.log("Ouch my ASS")
+			console.log("Drop me")
 
 			let piece = e.dataTransfer.getData("text/plain");
 			e.target.appendChild(document.querySelector(`#${piece}`));
+
+			//counter increases by 1 for every drop
+            dropCounter += 1;
+            console.log('Counter = ' + dropCounter);
+            
+            //if the drop counter is less than 1, the puzzle piece goes back to pieces board.
+            if (dropCounter > 1) {
+                piecesBoard.appendChild(document.querySelector(`#${piece}`));
+            }
 		});
 	});
 
@@ -67,5 +77,7 @@
 	puzzleSelectors.forEach(puzzle => puzzle.addEventListener('click', resetPuzzlePieces));
 
 	createPuzzlePieces(0);
+
+
 
 })();
