@@ -64,6 +64,28 @@
                 piecesBoard.appendChild(document.querySelector(`#${piece}`));
             }
 		});
+
+	//Clicking on puzzle piece in quadrient sends it back to pieces board
+        zone.addEventListener("click", function(e) {
+            console.log('clicked me');
+            
+            //removes image and puts it back into pieces board
+            let images = e.target;
+            zone.removeChild(images);
+            piecesBoard.appendChild(images);
+            dropCounter = 0;
+            }); 
+        
+        //resets counter to 0 to allow another puzzle piece into that quadrient
+        zone.addEventListener('dragstart', function(e) {
+            console.log('drag');
+            dropCounter = 0;
+        });
+        
+        //counter reset when puzzle piece is clicked
+        puzzleSelectors.forEach(puzzle => puzzle.addEventListener('click', function(e) {
+            dropCounter = 0;
+        }));
 	});
 
 
